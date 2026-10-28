@@ -25,6 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
           details.participants && details.participants.length > 0
             ? `<ul class="participants-list">
                 ${details.participants
+                  .map((email) =>
+                    email.replace(/[&<>"']/g, (character) => ({
+                      "&": "&amp;",
+                      "<": "&lt;",
+                      ">": "&gt;",
+                      '"': "&quot;",
+                      "'": "&#39;",
+                    }[character]))
+                  )
                   .map(
                     (email) => `
                     <li class="participant-item">
